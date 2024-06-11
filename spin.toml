@@ -1,0 +1,18 @@
+spin_manifest_version = 2
+
+[application]
+name = "scraper"
+version = "0.1.0"
+authors = ["Mikkel Mørk Hegnhøj <mikkel@fermyon.com>"]
+description = ""
+
+[[trigger.http]]
+route = "/..."
+component = "scraper"
+
+[component.scraper]
+source = "target/wasm32-wasi/release/scraper.wasm"
+allowed_outbound_hosts = ["https://www.fermyon.com"]
+[component.scraper.build]
+command = "cargo build --target wasm32-wasi --release"
+watch = ["src/**/*.rs", "Cargo.toml"]
